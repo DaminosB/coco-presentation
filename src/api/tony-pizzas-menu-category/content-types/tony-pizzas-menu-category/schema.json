@@ -4,7 +4,8 @@
   "info": {
     "singularName": "tony-pizzas-menu-category",
     "pluralName": "tony-pizzas-menu-categories",
-    "displayName": "Tony-pizzas_menu-category"
+    "displayName": "menu-category",
+    "description": ""
   },
   "options": {
     "draftAndPublish": true
@@ -14,11 +15,11 @@
     "Categorie": {
       "type": "string"
     },
-    "tony_pizzas_menu_items": {
+    "menu_items": {
       "type": "relation",
       "relation": "manyToMany",
       "target": "api::tony-pizzas-menu-item.tony-pizzas-menu-item",
-      "inversedBy": "tony_pizzas_menu_categories"
+      "mappedBy": "menu_categories"
     }
   }
 }

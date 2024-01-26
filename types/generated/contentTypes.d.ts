@@ -368,14 +368,15 @@ export interface ApiTonyPizzasMenuCategoryTonyPizzasMenuCategory
   info: {
     singularName: 'tony-pizzas-menu-category';
     pluralName: 'tony-pizzas-menu-categories';
-    displayName: 'Tony-pizzas_menu-category';
+    displayName: 'menu-category';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
     Categorie: Attribute.String;
-    tony_pizzas_menu_items: Attribute.Relation<
+    menu_items: Attribute.Relation<
       'api::tony-pizzas-menu-category.tony-pizzas-menu-category',
       'manyToMany',
       'api::tony-pizzas-menu-item.tony-pizzas-menu-item'
@@ -404,16 +405,19 @@ export interface ApiTonyPizzasMenuItemTonyPizzasMenuItem
   info: {
     singularName: 'tony-pizzas-menu-item';
     pluralName: 'tony-pizzas-menu-items';
-    displayName: 'Tony-pizzas_menu-item';
+    displayName: 'menu-item';
+    description: '';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    Name: Attribute.String;
-    Description: Attribute.Blocks;
+    Name: Attribute.String & Attribute.Required;
+    Ingredients: Attribute.Text;
     Photos: Attribute.Media;
-    tony_pizzas_menu_categories: Attribute.Relation<
+    Prix: Attribute.Decimal & Attribute.Required;
+    Vegetarien: Attribute.Boolean & Attribute.DefaultTo<false>;
+    menu_categories: Attribute.Relation<
       'api::tony-pizzas-menu-item.tony-pizzas-menu-item',
       'manyToMany',
       'api::tony-pizzas-menu-category.tony-pizzas-menu-category'
