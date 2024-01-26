@@ -1,0 +1,34 @@
+{
+  "kind": "collectionType",
+  "collectionName": "tony_pizzas_menu_items",
+  "info": {
+    "singularName": "tony-pizzas-menu-item",
+    "pluralName": "tony-pizzas-menu-items",
+    "displayName": "Tony-pizzas_menu-item"
+  },
+  "options": {
+    "draftAndPublish": true
+  },
+  "pluginOptions": {},
+  "attributes": {
+    "Name": {
+      "type": "string"
+    },
+    "Description": {
+      "type": "blocks"
+    },
+    "Photos": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": true
+    },
+    "tony_pizzas_menu_categories": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::tony-pizzas-menu-category.tony-pizzas-menu-category",
+      "mappedBy": "tony_pizzas_menu_items"
+    }
+  }
+}

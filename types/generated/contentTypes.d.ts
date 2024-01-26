@@ -362,35 +362,35 @@ export interface AdminTransferTokenPermission extends Schema.CollectionType {
   };
 }
 
-export interface ApiCategoryCategory extends Schema.CollectionType {
-  collectionName: 'categories';
+export interface ApiTonyPizzasMenuCategoryTonyPizzasMenuCategory
+  extends Schema.CollectionType {
+  collectionName: 'tony_pizzas_menu_categories';
   info: {
-    singularName: 'category';
-    pluralName: 'categories';
-    displayName: 'Category';
-    description: '';
+    singularName: 'tony-pizzas-menu-category';
+    pluralName: 'tony-pizzas-menu-categories';
+    displayName: 'Tony-pizzas_menu-category';
   };
   options: {
     draftAndPublish: true;
   };
   attributes: {
-    menu_items: Attribute.Relation<
-      'api::category.category',
+    Categorie: Attribute.String;
+    tony_pizzas_menu_items: Attribute.Relation<
+      'api::tony-pizzas-menu-category.tony-pizzas-menu-category',
       'manyToMany',
-      'api::menu-item.menu-item'
+      'api::tony-pizzas-menu-item.tony-pizzas-menu-item'
     >;
-    Name: Attribute.String;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::category.category',
+      'api::tony-pizzas-menu-category.tony-pizzas-menu-category',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::category.category',
+      'api::tony-pizzas-menu-category.tony-pizzas-menu-category',
       'oneToOne',
       'admin::user'
     > &
@@ -398,12 +398,13 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
-export interface ApiMenuItemMenuItem extends Schema.CollectionType {
-  collectionName: 'menu_items';
+export interface ApiTonyPizzasMenuItemTonyPizzasMenuItem
+  extends Schema.CollectionType {
+  collectionName: 'tony_pizzas_menu_items';
   info: {
-    singularName: 'menu-item';
-    pluralName: 'menu-items';
-    displayName: 'Menu-item';
+    singularName: 'tony-pizzas-menu-item';
+    pluralName: 'tony-pizzas-menu-items';
+    displayName: 'Tony-pizzas_menu-item';
   };
   options: {
     draftAndPublish: true;
@@ -411,22 +412,98 @@ export interface ApiMenuItemMenuItem extends Schema.CollectionType {
   attributes: {
     Name: Attribute.String;
     Description: Attribute.Blocks;
-    categories: Attribute.Relation<
-      'api::menu-item.menu-item',
+    Photos: Attribute.Media;
+    tony_pizzas_menu_categories: Attribute.Relation<
+      'api::tony-pizzas-menu-item.tony-pizzas-menu-item',
       'manyToMany',
-      'api::category.category'
+      'api::tony-pizzas-menu-category.tony-pizzas-menu-category'
     >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
-      'api::menu-item.menu-item',
+      'api::tony-pizzas-menu-item.tony-pizzas-menu-item',
       'oneToOne',
       'admin::user'
     > &
       Attribute.Private;
     updatedBy: Attribute.Relation<
-      'api::menu-item.menu-item',
+      'api::tony-pizzas-menu-item.tony-pizzas-menu-item',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVirginieFleursArticleVirginieFleursArticle
+  extends Schema.CollectionType {
+  collectionName: 'virginie_fleurs_articles';
+  info: {
+    singularName: 'virginie-fleurs-article';
+    pluralName: 'virginie-fleurs-articles';
+    displayName: 'virginie-fleurs_article';
+    description: '';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    Description: Attribute.Blocks;
+    Photos: Attribute.Media;
+    virginie_fleurs_occasions: Attribute.Relation<
+      'api::virginie-fleurs-article.virginie-fleurs-article',
+      'manyToMany',
+      'api::virginie-fleurs-occasion.virginie-fleurs-occasion'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::virginie-fleurs-article.virginie-fleurs-article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::virginie-fleurs-article.virginie-fleurs-article',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiVirginieFleursOccasionVirginieFleursOccasion
+  extends Schema.CollectionType {
+  collectionName: 'virginie_fleurs_occasions';
+  info: {
+    singularName: 'virginie-fleurs-occasion';
+    pluralName: 'virginie-fleurs-occasions';
+    displayName: 'Virginie-fleurs_occasion';
+  };
+  options: {
+    draftAndPublish: true;
+  };
+  attributes: {
+    Name: Attribute.String & Attribute.Required;
+    virginie_fleurs_articles: Attribute.Relation<
+      'api::virginie-fleurs-occasion.virginie-fleurs-occasion',
+      'manyToMany',
+      'api::virginie-fleurs-article.virginie-fleurs-article'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    publishedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::virginie-fleurs-occasion.virginie-fleurs-occasion',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::virginie-fleurs-occasion.virginie-fleurs-occasion',
       'oneToOne',
       'admin::user'
     > &
@@ -850,8 +927,10 @@ declare module '@strapi/types' {
       'admin::api-token-permission': AdminApiTokenPermission;
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
-      'api::category.category': ApiCategoryCategory;
-      'api::menu-item.menu-item': ApiMenuItemMenuItem;
+      'api::tony-pizzas-menu-category.tony-pizzas-menu-category': ApiTonyPizzasMenuCategoryTonyPizzasMenuCategory;
+      'api::tony-pizzas-menu-item.tony-pizzas-menu-item': ApiTonyPizzasMenuItemTonyPizzasMenuItem;
+      'api::virginie-fleurs-article.virginie-fleurs-article': ApiVirginieFleursArticleVirginieFleursArticle;
+      'api::virginie-fleurs-occasion.virginie-fleurs-occasion': ApiVirginieFleursOccasionVirginieFleursOccasion;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;
